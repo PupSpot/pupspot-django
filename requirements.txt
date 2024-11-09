@@ -1,0 +1,9 @@
+# Core
+Django>=5.1
+
+# Development Tools
+black>=24.2.0
+isort>=5.13.0
+flake8>=7.0.0
+pylint>=3.0.3
+pylint-django>=2.5.5

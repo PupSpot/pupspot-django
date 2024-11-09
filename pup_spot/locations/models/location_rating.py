@@ -1,12 +1,11 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from locations.models.location import Location
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 class LocationRating(models.Model):
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey('locations.Location', on_delete=models.CASCADE, related_name='ratings')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     value = models.FloatField(
         help_text="Rating value from 0 to 5",

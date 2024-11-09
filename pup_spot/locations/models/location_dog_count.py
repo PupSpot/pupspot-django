@@ -5,7 +5,7 @@ User = get_user_model()
 
 class LocationDogCountReport(models.Model):
     location = models.ForeignKey(
-        'Location', 
+        'locations.Location', 
         on_delete=models.CASCADE,
         related_name='dog_count_reports'
     )

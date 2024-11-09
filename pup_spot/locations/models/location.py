@@ -19,17 +19,10 @@ class Location(models.Model):
 
     # User engagement fields
     likes = models.ManyToManyField(User, related_name='liked_locations', blank=True)
-    crowd_meter = models.FloatField(
+    average_crowd_meter = models.FloatField(
         blank=True, 
         null=True, 
-        help_text="Scale of 1-10"
-    )
-    ratings = models.ForeignKey(
-        'Rating',
-        on_delete=models.CASCADE,
-        related_name='locations',
-        blank=True,
-        null=True
+        help_text="Average crowdedness on scale of 1-10"
     )
     average_dog_count = models.IntegerField(blank=True, null=True)
 
@@ -39,7 +32,7 @@ class Location(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return f"{self.longitude}, {self.latitude}"
 
     ##
     # Properties
@@ -55,7 +48,7 @@ class Location(models.Model):
     @property
     def crowd_meter_value(self):
         """Return the crowd meter value, or 0 if not set"""
-        return self.crowd_meter or 0
+        return self.average_crowd_meter or 0
 
     @property
     def total_likes(self):

@@ -1,11 +1,10 @@
 from django.db import models
-from locations.models.location import Location
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 class LocationComment(models.Model):
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='comments')
+    location = models.ForeignKey('locations.Location', on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='location_comments')
     content = models.TextField()
     votes = models.ManyToManyField(User, related_name='comment_votes', blank=True)
