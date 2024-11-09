@@ -18,7 +18,6 @@ class Location(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
     # User engagement fields
-    likes = models.ManyToManyField(User, related_name='liked_locations', blank=True)
     average_crowd_meter = models.FloatField(
         blank=True, 
         null=True, 
@@ -51,11 +50,6 @@ class Location(models.Model):
         return self.average_crowd_meter or 0
 
     @property
-    def total_likes(self):
-        """Count total number of likes"""
-        return self.likes.count()
-
-    @property
     def top_comment(self):
         """Return the most upvoted comment, or None if no comments exist"""
         return self.comments.annotate(
@@ -65,20 +59,6 @@ class Location(models.Model):
     ##
     # Instance Methods
         
-    def add_like(self, user):
-        """Add a like from a user"""
-        if not self.likes.filter(id=user.id).exists():
-            self.likes.add(user)
-            return True
-        return False
-
-    def remove_like(self, user):
-        """Remove a like from a user"""
-        if self.likes.filter(id=user.id).exists():
-            self.likes.remove(user)
-            return True
-        return False
-
     def update_average_dog_count(self):
         """Update the average dog count based on all reports"""
         reports = self.dog_count_reports.all()
@@ -120,3 +100,25 @@ class Location(models.Model):
             value=value
         )
         self.update_crowd_meter()
+
+    @classmethod
+    def get_or_create_by_coordinates(cls, latitude, longitude, city=None, region=None, max_distance=0.001):
+        """
+        Get or create a location based on coordinates.
+        max_distance represents the maximum distance in decimal degrees 
+        (roughly 100m at 0.001)
+        """
+        nearby_location = cls.objects.filter(
+            latitude__range=(float(latitude) - max_distance, float(latitude) + max_distance),
+            longitude__range=(float(longitude) - max_distance, float(longitude) + max_distance)
+        ).first()
+
+        if nearby_location:
+            return nearby_location, False
+
+        return cls.objects.create(
+            latitude=latitude,
+            longitude=longitude,
+            city=city,
+            region=region
+        ), True
