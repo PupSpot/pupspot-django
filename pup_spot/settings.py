@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "locations",
-    "user_profiles"
+    "user_profiles",
+    "rest_framwork_simplejwt"
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,22 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+
+AUTH0_DOMAIN = "dev-8yxn7ind66gqamzr.us.auth0.com"
+API_IDENTIFIER = "https://pupspot_api.com"
+
+SIMPLE_JWT = {
+    'ALGORITHM': 'RS256'
+}
+
 
 ROOT_URLCONF = 'urls'
 
