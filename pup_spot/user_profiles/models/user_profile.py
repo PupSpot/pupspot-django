@@ -7,7 +7,6 @@ class UserProfile(BaseProfile):
     password = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     bio = models.TextField()
-    # avatar = models.ImageField() - We have to integrate this later
     location = models.CharField(max_length=255)
     username = models.CharField(max_length=255, unique=True)
 
