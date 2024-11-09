@@ -17,3 +17,7 @@ class UserProfile(BaseProfile):
         app_label = 'user_profiles'
         verbose_name = 'User Profile'
         
+
+    @property
+    def dog_profiles(self):
+        return self.dog_profiles.all()
