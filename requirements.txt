@@ -11,3 +11,7 @@ pylint-django>=2.5.5
 # API
 djangorestframework>=3.14.0
 pydantic>=2.6.1
+
+# Auth0
+auth0-python>=3.0.0
+djangorestframework-simplejwt>=5.0.0
