@@ -1,3 +1,18 @@
+# Virtual Environment
+venv/
 myenv/
-.venv/
+.env/
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+*.log
+db.sqlite3
+media/
+
+# IDE
+.vscode/
+.idea/
