@@ -11,5 +11,5 @@ class DogProfile(BaseProfile):
         return f'{self.display_name} the {self.breed}'
     
     class Meta:
-        app_label = 'pup_spot_profiles'
+        app_label = 'user_profiles'
         verbose_name = 'Dog Profile'

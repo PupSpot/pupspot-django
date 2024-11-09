@@ -14,5 +14,6 @@ class UserProfile(BaseProfile):
         return self.display_name
 
     class Meta:
-        app_label = 'pup_spot_profiles'
+        app_label = 'user_profiles'
         verbose_name = 'User Profile'
+        
