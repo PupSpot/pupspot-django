@@ -63,6 +63,9 @@ REST_FRAMEWORK = {
 
 AUTH0_DOMAIN = "dev-8yxn7ind66gqamzr.us.auth0.com"
 API_IDENTIFIER = "https://pupspot_api.com"
+AUTH0_CLIENT_SECRET = "5PrtD3hPWSG_BL5l_GMVkzJWJ04hQx2Y_FQUF89DehRr2sutgHDtTgoOsmF5HIoM"
+AUTH0_CLIENT_ID = "XAZYgozsrACx9pABKz376jteImbYL1an"
+AUTH0_CALLBACK_URL = "http://localhost:8000/callback"
 
 SIMPLE_JWT = {
     'ALGORITHM': 'RS256'
