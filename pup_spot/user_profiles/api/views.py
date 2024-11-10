@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import UserProfile
+from user_profiles.models import UserProfile
 import json
 
 from django.contrib.auth.hashers import make_password
@@ -21,7 +21,6 @@ def register_user(request):
             # Check if email is already registered
             if UserProfile.objects.filter(email=email).exists():
                 return JsonResponse({'error': 'Email is already registered'}, status=400)
-
 
             # Hash the password
             hashed_password = make_password(password)
@@ -68,12 +67,11 @@ def login_user(request):
     
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-
 @csrf_exempt  
 def get_user_details(request):
     if request.method == 'GET':
         # Get username from the query parameter
-        username = request.GET.get('username')  # Or use request.data.get('username') if it's a POST request
+        username = request.GET.get('username')
 
         if not username:
             return JsonResponse({'error': 'Username is required'}, status=400)
@@ -86,7 +84,7 @@ def get_user_details(request):
             user_data = {
                 'username': user.username,
                 'email': user.email,
-                'bio':user.bio,
+                'bio': user.bio,
                 'location': user.location
             }
 
