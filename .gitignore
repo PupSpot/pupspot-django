@@ -2,7 +2,9 @@
 venv/
 myenv/
 .env/
-
+python-version/
+pyproject.toml/
+uv.lock/
 # Python
 __pycache__/
 *.py[cod]
