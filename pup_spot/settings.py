@@ -10,6 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
+from django.core.exceptions import ImproperlyConfigured
+
+
+
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,18 +45,41 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "locations",
-    "user_profiles"
+    "user_profiles",
+    # "rest_framwork_simplejwt",
+    "corsheaders",
+    "auth0_login"
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+
+AUTH0_DOMAIN = "dev-8yxn7ind66gqamzr.us.auth0.com"
+API_IDENTIFIER = "https://pupspot_api.com"
+AUTH0_CLIENT_SECRET = "5PrtD3hPWSG_BL5l_GMVkzJWJ04hQx2Y_FQUF89DehRr2sutgHDtTgoOsmF5HIoM"
+AUTH0_CLIENT_ID = "XAZYgozsrACx9pABKz376jteImbYL1an"
+AUTH0_CALLBACK_URL = "http://localhost:8000/callback"
+
+SIMPLE_JWT = {
+    'ALGORITHM': 'RS256'
+}
+
 
 ROOT_URLCONF = 'urls'
 

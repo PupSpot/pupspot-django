@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .views import my_protected_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api_urls')),
+    path('protected/', my_protected_view),
 ]
 

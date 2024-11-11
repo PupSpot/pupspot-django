@@ -1,11 +1,11 @@
 from django.db import models
 from .base_profile import BaseProfile
 from locations.models import LocationRating, LocationCrowdMeter, LocationDogCountReport
-from django.contrib.auth.hashers import make_password, check_password
+# from django.contrib.auth.hashers import make_password, check_password
 
 class UserProfile(BaseProfile):
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)  # Make sure to hash passwords before saving
+    # password = models.CharField(max_length=255)  # Make sure to hash passwords before saving
     location = models.CharField(max_length=255)
     bio = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=255, unique=True)
@@ -14,9 +14,9 @@ class UserProfile(BaseProfile):
         return self.username
 
 
-    def check_password(self, raw_password):
-        # Check password by comparing it with the hashed password
-        return check_password(raw_password, self.password)
+    # def check_password(self, raw_password):
+    #     # Check password by comparing it with the hashed password
+    #     return check_password(raw_password, self.password)
 
     class Meta:
         app_label = 'user_profiles'
